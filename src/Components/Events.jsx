@@ -120,7 +120,7 @@ const Events = ({ isWalletConnected, checkSigner, signer }) => {
 								}}
 								alt={`event-${i}`}
 							/>
-                            <button onClick={() => mintNft(i)} className="event__mint">Mint Button</button>
+                            <button onClick={() => mintNft(i)} className="event__mint">Buy Ticket</button>
 						</div>
 					);
 				})}
