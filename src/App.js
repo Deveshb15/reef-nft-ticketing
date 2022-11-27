@@ -4,7 +4,8 @@ import { Provider, Signer } from "@reef-defi/evm-provider";
 import { WsProvider } from "@polkadot/rpc-provider";
 import { Contract } from "ethers";
 import GreeterContract from "./contracts/Greeter.json";
-import Uik from "@reef-defi/ui-kit";
+import AddEvent from "./Components/AddEvent";
+import Events from './Components/Events'
 
 const FactoryAbi = GreeterContract.abi;
 const factoryContractAddress = GreeterContract.address;
@@ -12,10 +13,9 @@ const factoryContractAddress = GreeterContract.address;
 const URL = "wss://rpc-testnet.reefscan.com/ws";
 
 function App() {
-	const [msgVal, setMsgVal] = useState("");
-	const [msg, setMsg] = useState("");
 	const [signer, setSigner] = useState();
 	const [isWalletConnected, setWalletConnected] = useState(false);
+	const [currentPage, setCurrentPage] = useState("tickets")
 
 	const checkExtension = async () => {
 		let allInjected = await web3Enable("Reef");
@@ -68,17 +68,6 @@ function App() {
 		return true;
 	};
 
-	const getGreeting = async () => {
-		await checkSigner();
-		const factoryContract = new Contract(
-			factoryContractAddress,
-			FactoryAbi,
-			signer
-		);
-		const result = await factoryContract.greet();
-		setMsg(result);
-	};
-
 	const setGreeting = async () => {
 		await checkSigner();
 		const factoryContract = new Contract(
@@ -86,169 +75,58 @@ function App() {
 			FactoryAbi,
 			signer
 		);
-		await factoryContract.setGreeting(msgVal);
-		setMsgVal("");
-		getGreeting();
+		console.log(factoryContract)
+		let tokensCreated = await factoryContract._tokensCreated()
+		console.log("Tokens created ", tokensCreated.toString())
+		let tokens = []
+		if(tokensCreated) {
+			tokensCreated = (+tokensCreated)
+			for(let i=0; i<tokensCreated; i++) {
+				let tokenUri = await factoryContract.uri(i)
+				tokens.push(tokenUri)
+			}
+		}
+		console.log("URIs ", tokens)
+		// await factoryContract.setGreeting(msgVal);
+		// getGreeting();
 	};
 
+	const pageHandler = () => {
+		if(currentPage === "tickets") {
+			setCurrentPage("addEvents")
+		} else {
+			setCurrentPage("tickets")
+		}
+	}
+
 	return (
-		<Uik.Container className="main">
-			<Uik.Container vertical>
-				<Uik.Container>
-					<Uik.Text text="Create" type="headline" />
-					<Uik.ReefLogo /> <Uik.Text text="Dapp" type="headline" />
-				</Uik.Container>
-				{isWalletConnected ? (
-					<Uik.Container vertical className="container">
-						<Uik.Divider text="Get Message from Contract" />
-						<Uik.Card condensed>
-							<Uik.Container>
-								<Uik.Input
-									onChange={e => setMsgVal(e.target.value)}
-									value={msgVal}
-								/>
-								<Uik.Button
-									onKeyPress={e => {
-										e.key === "Enter" && setGreeting();
-									}}
-									onClick={setGreeting}
-									text="Set message"
-									className="container-button"
-								/>
-							</Uik.Container>
-						</Uik.Card>
-						<Uik.Divider text="Set Message to Contract" />
-						<Uik.Card condensed>
-							<Uik.Container flow="spaceBetween">
-								<Uik.Text
-									text={
-										msg.length
-											? msg
-											: "Nothing on contract yet"
-									}
-									type={msg.length ? "lead" : "light"}
-								/>
-								<Uik.Button
-									className="container-button"
-									onClick={getGreeting}
-									text="Get Message"
-								/>
-							</Uik.Container>
-						</Uik.Card>
-					</Uik.Container>
-				) : (
-					<>
-						<Uik.Container vertical className="container">
-							<Uik.Text
-								className="title"
-								text="Congratulations! Your Reef Dapp is set to go 🎉"
-								type="title"
-							/>
-							<Uik.Text
-								text="We've gone ahead and added essential Reef components to quickstart your Dapp 🪸"
-								type="light"
-							/>
-							<br />
-							<Uik.Text
-								type="light"
-								text={
-									<>
-										<a
-											target="_blank"
-											rel="noreferrer"
-											href="https://ui-kit.reef.io"
-										>
-											Reef UI Kit:
-										</a>
-										<span>
-											{" "}
-											Reef's official component library to
-											help you make beautiful dapps with
-											ease
-										</span>
-									</>
-								}
-							/>
-							<Uik.Text
-								type="light"
-								text={
-									<>
-										<a
-											target="_blank"
-											rel="noreferrer"
-											href="https://github.com/reef-defi/evm-provider.js"
-										>
-											Reef EVM Provider:
-										</a>
-										<span>
-											{" "}
-											Implements a web3 provider which can
-											interact with the Reef chain EVM.
-										</span>
-									</>
-								}
-							/>
-							<Uik.Text
-								type="light"
-								text={
-									<>
-										<a
-											target="_blank"
-											rel="noreferrer"
-											href="https://create-react-app.dev/"
-										>
-											Create React App:
-										</a>
-										<span>
-											{" "}
-											Create React App is the best way to
-											start building a new single-page
-											application in React.
-										</span>
-									</>
-								}
-							/>
-							<Uik.Text
-								type="light"
-								text={
-									<>
-										<a
-											target="_blank"
-											rel="noreferrer"
-											href="https://github.com/dilanx/craco"
-										>
-											Craco:
-										</a>
-										<span>
-											{" "}
-											Craco helps you leverage the power
-											of webpack and babel configurations
-											without ejecting your CRA template
-										</span>
-									</>
-								}
-							/>
-							<br />
-							<Uik.Text
-								text={
-									<>
-										Click the{" "}
-										<Uik.Tag>Connect Wallet</Uik.Tag> button
-										to get started 🚀
-									</>
-								}
-								type="light"
-							/>
-						</Uik.Container>
-						<br />
-						<Uik.Button
-							text="Connect Wallet"
-							onClick={checkExtension}
-						/>
-					</>
-				)}
-			</Uik.Container>
-		</Uik.Container>
+		<div>
+			<div className="navbar">
+				<p>Events</p>
+				<button onClick={pageHandler}>{currentPage === "tickets" ? 'Add Event' : 'Events'}</button>
+			</div>
+			<div className="main__container">
+				<h1>NFT event ticketing</h1>
+				{
+					isWalletConnected ? (
+						<div>
+							{
+								currentPage === "tickets" ? (
+									<Events isWalletConnected={isWalletConnected} checkSigner={checkSigner} signer={signer} />
+								) : (
+									<AddEvent checkSigner={checkSigner} signer={signer} />
+								)
+							}
+						</div>
+					) : (
+						<div>
+							<h1>Connect Wallet</h1>
+							<button onClick={checkExtension}>Connect Wallet</button>
+						</div>
+					)
+				}
+			</div>
+		</div>
 	);
 }
 

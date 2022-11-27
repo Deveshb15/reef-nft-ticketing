@@ -1,28 +1,56 @@
-/* Reef UI Kit is used by default, you can add other styles here */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-.main {
-	min-height: 100vh;
-	width: clamp(300px, 75%, 800px) !important;
-	margin-inline: auto;
-	text-align: center;
+html, body {
+	background-color: black;
+	color: white;
+	font-family: 'Poppins', sans-serif;
 }
 
-.container {
-	max-width: 400px;
-	padding-top: 1rem;
+.navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	position: fixed;
+	top: 0;
+	width: 90%;
+	padding: 0 24px;
 }
 
-.container .title {
-	margin-bottom: 1rem;
+.main__container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 95vh;
+	flex-direction: column;
 }
 
-.container .uik-text {
-	text-align: justify;
-	width: 100%;
+.event__contianer {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.container a {
-	color: #19233c;
+.event__main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 16px;
+}
+
+.event__image {
+	width: 150px;
+	height: 150px;
+	border-radius: 24px;
+}
+
+.event__mint {
+	margin: 4px;
+}
+
+h1 {
+	font-size: 64px;
+	font-weight: 800;
+	color: white;
 }
 
 a {
@@ -32,8 +60,4 @@ a {
 
 a:hover {
 	text-decoration: underline;
-}
-
-.container-button {
-	margin-left: 1rem !important;
 }
