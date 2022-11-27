@@ -1,1 +1,1 @@
-command = "CI= yarn build"
+command = "CI= craco build"
