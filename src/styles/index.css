@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 html, body {
-	background-color: black;
 	color: white;
 	font-family: 'Poppins', sans-serif;
 }
@@ -14,6 +13,7 @@ html, body {
 	top: 0;
 	width: 90%;
 	padding: 0 24px;
+	margin-top: 5px;
 }
 
 .main__container {
@@ -50,7 +50,7 @@ html, body {
 h1 {
 	font-size: 64px;
 	font-weight: 800;
-	color: white;
+	color: #a93185;
 }
 
 a {
@@ -60,4 +60,8 @@ a {
 
 a:hover {
 	text-decoration: underline;
+}
+
+p{
+	color: #19233c;
 }

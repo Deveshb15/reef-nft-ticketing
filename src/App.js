@@ -6,6 +6,8 @@ import { Contract } from "ethers";
 import GreeterContract from "./contracts/Greeter.json";
 import AddEvent from "./Components/AddEvent";
 import Events from './Components/Events'
+import Uik from '@reef-defi/ui-kit';
+
 
 const FactoryAbi = GreeterContract.abi;
 const factoryContractAddress = GreeterContract.address;
@@ -92,6 +94,7 @@ function App() {
 	};
 
 	const pageHandler = () => {
+		console.log('inside')
 		if(currentPage === "tickets") {
 			setCurrentPage("addEvents")
 		} else {
@@ -100,13 +103,16 @@ function App() {
 	}
 
 	return (
+		<>
 		<div>
 			<div className="navbar">
 				<p>Events</p>
-				<button onClick={pageHandler}>{currentPage === "tickets" ? 'Add Event' : 'Events'}</button>
+				<Uik.Button  rounded fill size='large' onClick={pageHandler}>{currentPage === "tickets" ? 'Add Event' : 'Events'}</Uik.Button>
 			</div>
 			<div className="main__container">
-				<h1>NFT event ticketing</h1>
+			{/* <Uik.Text text='NFT event ticketing' type='headline'/> */}
+
+				<h1 >NFT Event ticketing</h1>
 				{
 					isWalletConnected ? (
 						<div>
@@ -120,13 +126,17 @@ function App() {
 						</div>
 					) : (
 						<div>
-							<h1>Connect Wallet</h1>
-							<button onClick={checkExtension}>Connect Wallet</button>
+						
+							{/* <h1>Connect Wallet</h1> */}
+							<Uik.Button onClick={checkExtension} fill text="Connect Wallet"/>
 						</div>
 					)
 				}
 			</div>
 		</div>
+		<Uik.FishAnimation />
+  		<Uik.Bubbles/>
+		</>
 	);
 }
 
