@@ -5,6 +5,10 @@ html, body {
 	font-family: 'Poppins', sans-serif;
 }
 
+.fish-animation {
+	z-index: -99 !important;
+}
+
 .navbar {
 	display: flex;
 	align-items: center;
