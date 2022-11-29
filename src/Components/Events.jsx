@@ -10,7 +10,7 @@ const Events = ({ isWalletConnected, checkSigner, signer }) => {
 	const [contract, setContract] = useState(null);
 	const [events, setEvents] = useState([]);
 
-	const DEFAULT_IPFS_GATEWAY_URL = "https://ipfs.io/ipfs/";
+	const DEFAULT_IPFS_GATEWAY_URL = "https://ipfs-gateway.cloud/ipfs/";
 
 	const cleanUpHash = async (hash, gateway = DEFAULT_IPFS_GATEWAY_URL) => {
 		try {
@@ -28,7 +28,7 @@ const Events = ({ isWalletConnected, checkSigner, signer }) => {
 		}
 	};
 
-	const cleanUpIPFS = (hash, gateway = "https://ipfs-gateway.cloud/ipfs/") => {
+	const cleanUpIPFS = (hash, gateway = DEFAULT_IPFS_GATEWAY_URL) => {
 		// remove the leading 'ipfs://' if it exists
 		if (hash?.startsWith("ipfs://")) {
 			return gateway + hash.substring(7);
