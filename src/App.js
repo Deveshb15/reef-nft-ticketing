@@ -106,7 +106,7 @@ function App() {
 		<>
 		<div>
 			<div className="navbar">
-				<p>Events</p>
+				<Uik.Text text='Zoomba' type='headline'/>
 				<Uik.Button  rounded fill size='large' onClick={pageHandler}>{currentPage === "tickets" ? 'Add Event' : 'Events'}</Uik.Button>
 			</div>
 			<div className="main__container">
