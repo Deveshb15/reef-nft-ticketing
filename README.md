@@ -14,7 +14,7 @@
 ## Live demo - [Zoomba NFT Ticketing](https://reef-nft-ticketing.netlify.app/)
 
 
-## Demo video - 
+## Demo video - [Loom Video](https://www.loom.com/share/da01d7b61887404a82d7914a2d915d79)
 
 
 ## Our Roadmap and about us - [Roadmap](https://deveshb.notion.site/NFT-ticketing-platform-e47230e7343742d49956c7fd424c822f)
