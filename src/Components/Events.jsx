@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Contract, BigNumber, utils } from "ethers";
 import axios from "axios";
 import GreeterContract from "../contracts/Greeter.json";
+import Uik from '@reef-defi/ui-kit';
 
 const FactoryAbi = GreeterContract.abi;
 const factoryContractAddress = GreeterContract.address;
@@ -120,7 +121,7 @@ const Events = ({ isWalletConnected, checkSigner, signer }) => {
 								}}
 								alt={`event-${i}`}
 							/>
-                            <button onClick={() => mintNft(i)} className="event__mint">Buy Ticket</button>
+							<Uik.Button onClick={() => mintNft(i)} text='Buy Ticket'/>
 						</div>
 					);
 				})}
