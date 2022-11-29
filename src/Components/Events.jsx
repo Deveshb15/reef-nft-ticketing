@@ -109,8 +109,8 @@ const Events = ({ isWalletConnected, checkSigner, signer }) => {
 								src={
 									ev?.image
 										? cleanUpIPFS(ev.image)
-										: ev.image_url
-										? cleanUpIPFS(ev.image_url)
+										: ev?.image_url
+										? cleanUpIPFS(ev?.image_url)
 										: "https://i.ibb.co/tZh0rvt/Untitled-design-3-removebg-preview.png"
 								}
 								onError={({ currentTarget }) => {
