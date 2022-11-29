@@ -30,9 +30,11 @@
 - [Twitter](https://twitter.com/Deveshb15)
 - [Github](https://github.com/Deveshb15)
 - Discord - Devesh^F#8307
+- Telegram - @Deveshb15
 
 ### Vidhatha T - Full stack developer
 
 - [Twitter](https://twitter.com/tvidhatha)
 - [Github](https://github.com/vidhathat)
 - Discord - vidhu#7400
+- Telegram - @Vidhu16
