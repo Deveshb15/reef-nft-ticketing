@@ -50,7 +50,7 @@ const Events = ({ isWalletConnected, checkSigner, signer }) => {
 			let tokens = [];
 			if (tokensCreated) {
 				tokensCreated = +tokensCreated;
-				for (let i = 0; i < tokensCreated; i++) {
+				for (let i = tokensCreated-1; i >= 0; i--) {
 					let tokenUri = await factoryContract.uri(i);
 					console.log(" I ", i, " uri ", tokenUri);
 					if (tokenUri) {
